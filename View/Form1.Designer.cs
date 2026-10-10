@@ -65,11 +65,12 @@
             // button3
             // 
             button3.Location = new Point(357, 27);
-            button3.Name = "button3";
+            button3.Name = "btnDelete";
             button3.Size = new Size(75, 23);
             button3.TabIndex = 2;
-            button3.Text = "button3";
+            button3.Text = "Delete";
             button3.UseVisualStyleBackColor = true;
+            button3.Click += btnDelete_Click;
             // 
             // btnRefresh
             // 

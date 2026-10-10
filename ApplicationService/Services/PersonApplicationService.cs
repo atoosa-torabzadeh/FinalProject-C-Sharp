@@ -55,6 +55,12 @@ namespace ApplicationService.Services
                 
             };
             _personServiceModel.Update(person);
+        }
+        #endregion
+        #region Delete()
+        public void Delete(DeletePersonDto deletePersonDto)
+        {
+            _personServiceModel.Delete(deletePersonDto.Id);
         } 
         #endregion
     }

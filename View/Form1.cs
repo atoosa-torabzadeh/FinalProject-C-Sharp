@@ -6,7 +6,7 @@ namespace View
     public partial class Form1 : Form
     {
         private readonly PersonApplicationService _PersonApplicationService;
-        private int? _SelectedPersonId=null;
+        private int? _SelectedPersonId = null;
         public Form1()
         {
             InitializeComponent();
@@ -51,11 +51,11 @@ namespace View
             if (e.RowIndex >= 0)
             {
                 var row = dgvPerson.Rows[e.RowIndex];
-                _SelectedPersonId=Convert.ToInt32(row.Cells["Id"].Value);
+                _SelectedPersonId = Convert.ToInt32(row.Cells["Id"].Value);
                 txtFirstName.Text = row.Cells["FirstName"].Value.ToString();
                 txtLastName.Text = row.Cells["LastName"].Value.ToString();
                 btnRefresh.Enabled = false;
-                btnPost.Enabled= false;
+                btnPost.Enabled = false;
                 btnUpdate.Enabled = true;
 
             }
@@ -64,7 +64,7 @@ namespace View
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            if(_SelectedPersonId.HasValue)
+            if (_SelectedPersonId.HasValue)
             {
                 var updateDto = new UpdatePersonDto()
                 {
@@ -83,5 +83,34 @@ namespace View
 
 
         }
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (!_SelectedPersonId.HasValue)
+            {
+                MessageBox.Show("لطفاً ابتدا یک شخص را از جدول انتخاب کنید.");
+                return;
+            }
+            var result = MessageBox.Show(
+                 "آیااز حذف این شخص مطمئن هستید؟ ",
+                 "بله،مطمئن ام  خیر،حذف نشود",
+                 MessageBoxButtons.OKCancel,
+                 MessageBoxIcon.Question
+                );
+            if(DialogResult.OK == result)
+            {
+                var deleteDto = new DeletePersonDto()
+                {
+                    Id = _SelectedPersonId.Value
+                };
+                _PersonApplicationService.Delete(deleteDto);
+                MessageBox.Show("اطلاعات با موفقیت حذف شد");
+                RefreshForm();
+                dgvPerson.DataSource = _PersonApplicationService.GetAll();
+
+            }
+        }
+
+
+
     }
 }

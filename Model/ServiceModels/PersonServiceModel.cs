@@ -76,7 +76,36 @@ namespace Model.ServiceModels
                 }
 
             }
-        } 
+        }
         #endregion
+        #region Update()
+        public void Delete(int id)
+        {
+            {
+                using (var context = new ProjectDbContext())
+                {
+                    try
+                    {
+                        var currentPerson = context.Person.Find(id);
+                        if (currentPerson != null)
+                        {
+                            context.Person.Remove(currentPerson);
+                            context.SaveChanges();
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        throw;
+                    }
+                    finally
+                    {
+
+                    }
+
+                }
+            }
+        }
+        #endregion
+
     }
 }
