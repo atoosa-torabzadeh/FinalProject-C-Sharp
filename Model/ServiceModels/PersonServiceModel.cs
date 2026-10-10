@@ -27,6 +27,55 @@ namespace Model.ServiceModels
                 }
 
             }
+        }
+        #endregion
+        #region insert()
+        public void insert(Person person)
+        {
+            using (var context = new ProjectDbContext())
+            {
+                try
+                {
+                    //context.Person.Add(person);
+                    context.Add(person);
+                    context.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    throw;
+                }
+                finally
+                {
+
+                }
+
+            }
+        }
+        #endregion
+        #region Update()
+        public void Update(Person person)
+        {
+            using (var context = new ProjectDbContext()) {
+                try
+            {
+                var currentPerson = context.Person.Find(person.Id);
+                    if(currentPerson != null)
+                    {
+                        currentPerson.FirstName=person.FirstName;
+                        currentPerson.LastName=person.LastName;
+                        context.SaveChanges();
+                    }
+            }
+                catch (Exception ex)
+                {
+                    throw;
+                }
+                finally
+                {
+
+                }
+
+            }
         } 
         #endregion
     }
