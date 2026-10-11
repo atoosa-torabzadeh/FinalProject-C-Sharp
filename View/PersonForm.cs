@@ -3,11 +3,11 @@ using ApplicationService.Services;
 
 namespace View
 {
-    public partial class Form1 : Form
+    public partial class PersonForm : Form
     {
         private readonly PersonApplicationService _PersonApplicationService;
         private int? _SelectedPersonId = null;
-        public Form1()
+        public PersonForm()
         {
             InitializeComponent();
             _PersonApplicationService = new PersonApplicationService();
@@ -96,7 +96,7 @@ namespace View
                  MessageBoxButtons.OKCancel,
                  MessageBoxIcon.Question
                 );
-            if(DialogResult.OK == result)
+            if (DialogResult.OK == result)
             {
                 var deleteDto = new DeletePersonDto()
                 {
@@ -110,7 +110,9 @@ namespace View
             }
         }
 
-
-
+        private void btnBackToMain_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

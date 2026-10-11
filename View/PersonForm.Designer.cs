@@ -1,6 +1,6 @@
 ﻿namespace View
 {
-    partial class Form1
+    partial class PersonForm
     {
         /// <summary>
         ///  Required designer variable.
@@ -32,7 +32,7 @@
             btnUpdate = new Button();
             button3 = new Button();
             btnRefresh = new Button();
-            button5 = new Button();
+            btnBackToMain = new Button();
             lblFirstName = new Label();
             lblLastName = new Label();
             txtFirstName = new TextBox();
@@ -65,7 +65,7 @@
             // button3
             // 
             button3.Location = new Point(357, 27);
-            button3.Name = "btnDelete";
+            button3.Name = "button3";
             button3.Size = new Size(75, 23);
             button3.TabIndex = 2;
             button3.Text = "Delete";
@@ -82,14 +82,15 @@
             btnRefresh.UseVisualStyleBackColor = true;
             btnRefresh.Click += btnRefresh_Click;
             // 
-            // button5
+            // btnBackToMain
             // 
-            button5.Location = new Point(615, 27);
-            button5.Name = "button5";
-            button5.Size = new Size(75, 23);
-            button5.TabIndex = 4;
-            button5.Text = "button5";
-            button5.UseVisualStyleBackColor = true;
+            btnBackToMain.Location = new Point(627, 18);
+            btnBackToMain.Name = "btnBackToMain";
+            btnBackToMain.Size = new Size(177, 40);
+            btnBackToMain.TabIndex = 4;
+            btnBackToMain.Text = "بازگشت به صفحه اصلی";
+            btnBackToMain.UseVisualStyleBackColor = true;
+            btnBackToMain.Click += btnBackToMain_Click;
             // 
             // lblFirstName
             // 
@@ -134,23 +135,24 @@
             dgvPerson.TabIndex = 9;
             dgvPerson.CellClick += dgvPersonClick;
             // 
-            // Form1
+            // PersonForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(846, 462);
+            ControlBox = false;
             Controls.Add(dgvPerson);
             Controls.Add(txtLastName);
             Controls.Add(txtFirstName);
             Controls.Add(lblLastName);
             Controls.Add(lblFirstName);
-            Controls.Add(button5);
+            Controls.Add(btnBackToMain);
             Controls.Add(btnRefresh);
             Controls.Add(button3);
             Controls.Add(btnUpdate);
             Controls.Add(btnPost);
-            Name = "Form1";
-            Text = "Form1";
+            Name = "PersonForm";
+            Text = "PersonForm";
             ((System.ComponentModel.ISupportInitialize)dgvPerson).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -162,7 +164,7 @@
         private Button btnUpdate;
         private Button button3;
         private Button btnRefresh;
-        private Button button5;
+        private Button btnBackToMain;
         private Label lblFirstName;
         private Label lblLastName;
         private TextBox txtFirstName;
