@@ -33,10 +33,7 @@ namespace View
             dto.Quantity = Convert.ToInt32(txtQuantity.Text);
             _productApplicationService.Insert(dto);
             MessageBox.Show("اطلاعات محصول با موفقیت ثبت شد");
-            txtCode.Clear();
-            txtTitle.Clear();
-            txtUnitPrice.Clear();
-            txtQuantity.Clear();
+            ClearInputs();
             RefreshProduct();
 
         }
@@ -66,7 +63,7 @@ namespace View
             btnRefresh.Enabled = true;
             btnUpdate.Enabled = false;
             _selectedProductId = 0;
-        
+
         }
         private void ClearInputs()
         {
@@ -79,22 +76,62 @@ namespace View
 
         private void dgvProduct_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            
+
             if (e.RowIndex < 0) return;
 
             var selectedRow = dgvProduct.Rows[e.RowIndex];
 
-            _selectedProductId = Convert.ToInt32(selectedRow.Cells["Id"].Value);
+            // خواندن مستقیم مقدار Id از سلول جدول
+            if (selectedRow.Cells["Id"].Value != null && int.TryParse(selectedRow.Cells["Id"].Value.ToString(), out int id))
+            {
+                _selectedProductId = id;
+            }
+            else
+            {
+                _selectedProductId = 0;
+            }
+
             txtCode.Text = selectedRow.Cells["Code"].Value?.ToString();
             txtTitle.Text = selectedRow.Cells["Title"].Value?.ToString();
             txtUnitPrice.Text = selectedRow.Cells["UnitPrice"].Value?.ToString();
             txtQuantity.Text = selectedRow.Cells["Quantity"].Value?.ToString();
 
-            btnPost.Enabled = false;      
+            btnPost.Enabled = false;
             btnRefresh.Enabled = false;
             btnUpdate.Enabled = true;
         }
 
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (_selectedProductId <= 0)
+            {
+                MessageBox.Show("لطفاً یک محصول را از جدول انتخاب کنید.");
+                return;
+            }
+
+            var confirmResult = MessageBox.Show(
+                "آیا از حذف این محصول اطمینان دارید؟",
+                "تأیید حذف",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question
+            );
+
+            if (confirmResult == DialogResult.Yes)
+            {
+                _productApplicationService.Delete(_selectedProductId);
+
+                MessageBox.Show("محصول با موفقیت حذف شد.");
+
+                RefreshProduct();
+                ClearInputs();
+            }
+        }
+
+        private void btnBackToMain_Click(object sender, EventArgs e)
+        {
+            this.Close();        
+
     }
+}
 }
 

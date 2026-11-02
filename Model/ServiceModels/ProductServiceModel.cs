@@ -29,11 +29,11 @@ namespace Model.ServiceModels
             }
 
         }
-    
-    #endregion
+
+        #endregion
 
         #region - Update()-
-		  public void Update(Product product)
+        public void Update(Product product)
         {
             using (var context = new ProjectDbContext())
             {
@@ -47,6 +47,22 @@ namespace Model.ServiceModels
                 }
             }
 
+        }
+
+        #endregion
+
+        #region - Delete()-
+        public void Delete(int id)
+        {
+            using (var context = new ProjectDbContext())
+            {
+                var existingProduct = context.Products.FirstOrDefault(p => p.Id == id);
+                if (existingProduct != null)
+                {
+                    context.Remove(existingProduct);
+                    context.SaveChanges();
+                }
+            }
         }
     } 
     #endregion

@@ -22,6 +22,8 @@ namespace ApplicationService.Services
                     Id = item.Id,
                     Title = item.Title,
                     Quantity = item.Quantity,
+                    Code = item.Code,       
+                    UnitPrice = item.UnitPrice,
                 };
                 productDtos.Add(dto);
             }
@@ -59,6 +61,14 @@ namespace ApplicationService.Services
             var productServiceModel = new ProductServiceModel();
             productServiceModel.Update(product);
 
+        }
+        #endregion
+
+        #region  -Delete()-
+        public void Delete(int id)
+        {
+            var serviceModel = new ProductServiceModel();
+            serviceModel.Delete(id);
         } 
         #endregion
 

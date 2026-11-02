@@ -83,6 +83,7 @@
             btnDelete.TabIndex = 3;
             btnDelete.Text = "Delete";
             btnDelete.UseVisualStyleBackColor = true;
+            btnDelete.Click += btnDelete_Click;
             // 
             // btnRefresh
             // 
@@ -102,6 +103,7 @@
             btnBackToMain.TabIndex = 5;
             btnBackToMain.Text = "بازگشت به صفحه اصلی";
             btnBackToMain.UseVisualStyleBackColor = true;
+            btnBackToMain.Click += btnBackToMain_Click;
             // 
             // txtTitle
             // 
